@@ -1,54 +1,55 @@
-let productos = []
+let products = [];
 
 const getHome = (req, res) => {
-    try{
-        res.render('main.pug')
-    }catch(e){
-        console.log('error: ', e);
-        res.status(500)
+    try {
+      res.render('main.pug')
+    } catch (error) {
+      res
+      .status(error.statusCode ? error.statusCode : 500)
+      .json({ error: error.message });
     }
 }
 
-const getProducto = (req,res) => {
-
+const postProduct = (req, res) => {
     try {
-        let existe
-        if (productos.lenght > 0){
-            existe = true
-        }else {
-            existe = false
+        const { title, price, thumbnail } = req.body;
+        let id;
+
+        if (title !== '' && price !== '' && thumbnail !== '') {        
+        (products.length == 0) ? (id = 1) : (id = products[products.length - 1].id + 1);
+        
+        products.push({ id, title, price, thumbnail });
+    
+        res.redirect('/productos')
+        } else {
+        console.log('Complete all camps')
         }
-        res.render('productos.pug', {productos, existe})
-    }catch(e){
+    } catch (error) {
         res
         .status(error.statusCode ? error.statusCode : 500)
-        .json({error: error.message});
-    
-    }
-
+        .json({ error: error.message });
+    }  
 }
 
-const postProducto = (req, res) => {
-    try{
-        const { titulo, price, img} = req.body;
-        let id
-
-        if (titulo !== '' && price !== '' && img !== ''){
-            (productos.lenght == 0) ? (id=1) : (id = productos[productos.length -1].id + 1);
-            productos.push({id, titulo, price, img});
-            res.redirect('/productos')
-        }else{
-            console.log("q onda flaco te haces el lindo?");
+const getProduct = (req, res) => {
+    try {
+        let hasAny
+        if (products.length > 0) {
+        hasAny = true
+        } else {
+        hasAny = false
         }
-    }catch(e){
+        res.render('productos.pug', {products, hasAny})
+    } catch (error) {
         res
-        .status(error.statuscode ? error.statuscode : 500)
-        .json({error: e})
+        .status(error.statusCode ? error.statusCode : 500)
+        .json({ error: error.message });
     }
 }
 
-module.exports = {
-    postProducto,
-    getProducto,
+
+module.exports ={
+    postProduct,
+    getProduct,
     getHome
 }

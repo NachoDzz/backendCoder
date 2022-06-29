@@ -1,4 +1,3 @@
-
 const express = require('express')
 const path = require('path')
 const routes = require('./routes/index')
@@ -11,7 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Establece el motor de plantilla que se usa
-app.set('view engine', 'pug')
+app.set('view engine', 'ejs')
 
 // Establece la direccion donde se encuentran las plantillas
 app.set('views', path.join(__dirname, './views'))

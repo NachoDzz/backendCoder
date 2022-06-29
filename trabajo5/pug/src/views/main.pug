@@ -4,21 +4,24 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
-    body 
-        h1 añadir producto
-        form(action="/", methood="post")
-            label  titulo:
-            input(type="text", name="titulo")
+        Link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous")
+        title my app
+    body(class="container")
+        h1 Añadir producto en pug
+        form(action="/", method="post") 
+            span(class="me-2") Title:
+            input(type="text", name="title")
             br
-            label  precio:
-            input(type="number", name="precio")
             br
-            label  img:
-            input(type="text", name="img")
+            span(class="me-2") Precio:
+            input(type="number", name="price")
             br
-            input(type="submit", value="submit")
             br
-            a(href="/productos")
-                button productos
-            
+            span(class="me-2") img:
+            input(type="text", name="thumbnail")
+            br
+            br
+            input(type="submit", value="sumbit")
+        br
+        a(href="/products")
+            button Productos

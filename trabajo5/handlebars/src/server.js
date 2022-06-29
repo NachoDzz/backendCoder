@@ -1,5 +1,6 @@
 
 const express = require('express')
+const { engine } = require('express-handlebars')
 const path = require('path')
 const routes = require('./routes/index')
 
@@ -10,10 +11,17 @@ const app = express()
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Establece el motor de plantilla que se usa
-app.set('view engine', 'pug')
+app.engine('hbs', engine({
+    extname: '.hbs',
+    defaultLayout: path.join( __dirname, './views/layout/main.hbs' ),
+    layoutsDir: path.join( __dirname, './views/layout' ),
+    partialsDir: path.join( __dirname, './views/partials' )
+}))
 
-// Establece la direccion donde se encuentran las plantillas
+
+app.set('view engine', 'hbs')
+
+
 app.set('views', path.join(__dirname, './views'))
 
 app.use( '/', routes )

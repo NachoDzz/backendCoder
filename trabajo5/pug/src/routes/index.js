@@ -1,16 +1,16 @@
-const { Router } = require('express');
 
-const {
-    postProducto,
-    getProducto,
-    getHome } = require("../controllers/controller.js")
+const { Router } = require("express");
+
+const { postProduct,
+        getProduct, 
+        getHome } = require("../controllers/Controller");
 
 const routes = Router()
 
-routes.get("/", getHome)
+routes.get("/", getHome );
 
-routes.get("/productos", getProducto)
+routes.post("/", postProduct );
 
-routes.post("/", postProducto)
+routes.get("/productos", getProduct );
 
 module.exports = routes
